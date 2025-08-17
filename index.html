@@ -17,8 +17,8 @@
       color: #fff;
     }
 
-    /* Background video */
-    #bgVideo {
+    /* Background container (works for video or image) */
+    #bgMedia {
       position: fixed;
       top: 0;
       left: 0;
@@ -43,11 +43,11 @@
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       border-radius: 20px;
-      padding: 15px 15px; /* smaller top/bottom and left/right */
+      padding: 10px 15px; /* smaller height */
       min-width: 220px;
       display: flex;
       flex-direction: column;
-      align-items: center; /* center contents horizontally by default */
+      align-items: center;
       transition: transform 0.2s ease;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       border: 1px solid rgba(255,255,255,0.2);
@@ -84,16 +84,20 @@
     #clickBtn:hover { background-color: #555; box-shadow: 0 6px 14px rgba(0,0,0,0.4);}
     #clickBtn:active { transform: scale(0.95); box-shadow: 0 3px 8px rgba(0,0,0,0.4); }
 
-    /* Video circle */
-    .circle-video {
-      width: 120px; /* slightly smaller */
+    /* Circle media (video or image) */
+    .circle-media {
+      width: 120px;
       height: 120px;
       border-radius: 50%;
       overflow: hidden;
       margin-bottom: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .circle-video video {
+    .circle-media video,
+    .circle-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -147,13 +151,16 @@
       cursor: pointer;
       font-size: 1.2em;
     }
-
   </style>
 </head>
 <body>
-  <video autoplay muted loop id="bgVideo">
-    <source src="background.mp4" type="video/mp4">
+  <!-- Background media (can be video OR image) -->
+  <video autoplay muted loop id="bgMedia">
+    <source src="background6.mp4" type="video/mp4">
   </video>
+  
+  <!-- <img src="background2.jpg" id="bgMedia" alt="Background"> -->
+  
 
   <div class="top-bar">
     <!-- User info -->
@@ -165,12 +172,15 @@
       <button id="clickBtn">+1 Motivation</button>
     </div>
 
-    <!-- Group/Server info with circle video and GMT clock -->
+    <!-- Group/Server info with circle media and GMT clock -->
     <div class="glass-box">
-      <div class="circle-video">
+      <div class="circle-media">
         <video autoplay loop muted playsinline>
           <source src="circle.mp4" type="video/mp4">
         </video>
+        <!-- If you want an image instead: 
+        <img src="circle.jpg" alt="Circle media">
+        -->
       </div>
       <div class="gmt-clock" id="gmtClock">00:00:00</div>
     </div>
@@ -178,11 +188,10 @@
 
   <!-- Music bar -->
   <div class="music-bar">
-    <div class="track-name">Depression...</div>
+    <div class="track-name">Blossom...</div>
     <div class="progress-bar">
       <div class="progress"></div>
     </div>
-    <button>⏯</button>
   </div>
 
   <script type="module">
